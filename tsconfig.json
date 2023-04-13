@@ -4,12 +4,28 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
+    "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "types": ["vite/client"],
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "@apiClients": ["src/apiClients"],
+      "@components": ["src/components"],
+      "@constants": ["src/constants"],
+      "@interfaces": ["src/interfaces"],
+      "@jest-utils": ["jest.utils.tsx"],
+      "@layouts": ["src/layouts"],
+      "@models": ["src/models"],
+      "@mocks/*": ["src/mocks/*"],
+      "@pages": ["src/pages"],
+      "@routes": ["src/routes"],
+      "@states": ["src/states"],
+      "@store": ["src/store.ts"],
+      "@utils": ["src/utils"]
+    }
   }
 }
