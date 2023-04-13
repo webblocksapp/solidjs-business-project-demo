@@ -49,5 +49,8 @@
     "solid-form-handler": "1.2.0-alpha.4",
     "solid-js": "^1.7.3",
     "yup": "^1.1.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
