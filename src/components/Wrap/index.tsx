@@ -7,13 +7,9 @@ export interface WrapProps {
 }
 
 export const Wrap: Component<WrapProps> = (props) => {
-  const Wrapper = props.with;
-
   return (
     <Switch fallback={props.children}>
-      <Match when={props.when}>
-        <Wrapper>{props.children}</Wrapper>
-      </Match>
+      <Match when={props.when}>{props.with(props)}</Match>
     </Switch>
   );
 };
