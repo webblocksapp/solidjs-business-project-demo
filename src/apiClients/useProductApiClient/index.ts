@@ -11,8 +11,8 @@ export const useProductApiClient = () => {
       data,
       pagination: {
         count: Number(headers['x-total-count']),
-        limit: params._limit,
-        page: params._page,
+        limit: params._limit!,
+        page: params._page!,
       },
     };
   };
