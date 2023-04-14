@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { TableHead as SuidTableHead } from '@suid/material';
+import { Th as HuiTableHead, ThProps as HuiTableHeadProps } from '@hope-ui/solid';
 
-type SuidTableHeadProps = Parameters<typeof SuidTableHead>[0];
-export type TableHeadProps = SuidTableHeadProps & {};
+export type TableHeadProps = HuiTableHeadProps & {};
 
 export const TableHead: Component<TableHeadProps> = (props) => {
-  return <SuidTableHead {...props} />;
+  return <HuiTableHead {...props} />;
 };

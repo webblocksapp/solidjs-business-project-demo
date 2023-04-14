@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { TableBody as SuidTableBody } from '@suid/material';
+import { Tbody as HuiTableBody, TbodyProps as HuiTableBodyProps } from '@hope-ui/solid';
 
-type SuidTableBodyProps = Parameters<typeof SuidTableBody>[0];
-export interface TableBodyProps extends SuidTableBodyProps {}
+export interface TableBodyProps extends HuiTableBodyProps {}
 
 export const TableBody: Component<TableBodyProps> = (props) => {
-  return <SuidTableBody {...props} />;
+  return <HuiTableBody {...props} />;
 };

@@ -1,9 +1,15 @@
-import { Component } from 'solid-js';
-import { Alert as SuidAlert } from '@suid/material';
+import { Component, splitProps } from 'solid-js';
+import { Alert as HuiAlert, AlertProps as HuiAlertProps, AlertIcon, AlertTitle } from '@hope-ui/solid';
 
-type SuidAlertProps = Parameters<typeof SuidAlert>[0];
-export interface AlertProps extends SuidAlertProps {}
+export interface AlertProps extends HuiAlertProps {}
 
 export const Alert: Component<AlertProps> = (props) => {
-  return <SuidAlert {...props} />;
+  const [local, rest] = splitProps(props, ['children']);
+
+  return (
+    <HuiAlert {...rest}>
+      <AlertIcon mr="$2_5" />
+      <AlertTitle>{local.children}</AlertTitle>
+    </HuiAlert>
+  );
 };

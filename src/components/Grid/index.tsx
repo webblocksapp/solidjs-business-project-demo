@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { Grid as SuidGrid } from '@suid/material';
+import { Grid as HuiGrid, GridProps as HuiGridProps } from '@hope-ui/solid';
 
-type SuidGridProps = Parameters<typeof SuidGrid>[0];
-export interface GridProps extends SuidGridProps {}
+export interface GridProps extends HuiGridProps {}
 
 export const Grid: Component<GridProps> = (props) => {
-  return <SuidGrid {...props} />;
+  return <HuiGrid {...props} />;
 };

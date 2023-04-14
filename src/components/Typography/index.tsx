@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { Typography as SuidTypography } from '@suid/material';
+import { Text as HuiTypography, TextProps as HuiTypographyProps } from '@hope-ui/solid';
 
-type SuidTypographyProps = Parameters<typeof SuidTypography>[0];
-export interface TypographyProps extends SuidTypographyProps {}
+export interface TypographyProps extends HuiTypographyProps {}
 
 export const Typography: Component<TypographyProps> = (props) => {
-  return <SuidTypography {...props} />;
+  return <HuiTypography {...props} />;
 };

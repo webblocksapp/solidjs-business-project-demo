@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { Stack as SuidStack } from '@suid/material';
+import { Stack as HuiStack, StackProps as HuiStackProps } from '@hope-ui/solid';
 
-type SuidStackProps = Parameters<typeof SuidStack>[0];
-export interface StackProps extends SuidStackProps {}
+export interface StackProps extends HuiStackProps {}
 
 export const Stack: Component<StackProps> = (props) => {
-  return <SuidStack {...props} />;
+  return <HuiStack {...props} />;
 };

@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { ListItemText as SuidListItemText } from '@suid/material';
+import { ListItem as HuiListItemText, ListItemProps as HuiListItemTextProps } from '@hope-ui/solid';
 
-type SuidListItemTextProps = Parameters<typeof SuidListItemText>[0];
-export interface ListItemTextProps extends SuidListItemTextProps {}
+export interface ListItemTextProps extends HuiListItemTextProps {}
 
 export const ListItemText: Component<ListItemTextProps> = (props) => {
-  return <SuidListItemText {...props} />;
+  return <HuiListItemText {...props} />;
 };

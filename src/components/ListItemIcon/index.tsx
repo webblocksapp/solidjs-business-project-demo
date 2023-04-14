@@ -1,9 +1,9 @@
 import { Component } from 'solid-js';
-import { ListItemIcon as SuidListItemIcon } from '@suid/material';
+import { ListIcon as HuiListItemIcon } from '@hope-ui/solid';
 
-type SuidListItemIconProps = Parameters<typeof SuidListItemIcon>[0];
-export interface ListItemIconProps extends SuidListItemIconProps {}
+type HuiListItemIconProps = Parameters<typeof HuiListItemIcon>[0];
+export type ListItemIconProps = HuiListItemIconProps & {};
 
 export const ListItemIcon: Component<ListItemIconProps> = (props) => {
-  return <SuidListItemIcon {...props} />;
+  return <HuiListItemIcon {...props} />;
 };

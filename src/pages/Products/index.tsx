@@ -1,18 +1,18 @@
 import { Component } from 'solid-js';
-import { Breadcrumbs, Grid, Typography } from '@components';
+import { Breadcrumb, Grid, GridItem, Typography } from '@components';
 import { Outlet } from '@solidjs/router';
 
 export const Products: Component = () => {
   return (
-    <Grid container rowSpacing={2}>
-      <Grid item xs={12}>
-        <Breadcrumbs>
+    <Grid>
+      <GridItem>
+        <Breadcrumb>
           <Typography>Products</Typography>
-        </Breadcrumbs>
-      </Grid>
-      <Grid item xs={12}>
+        </Breadcrumb>
+      </GridItem>
+      <GridItem>
         <Outlet />
-      </Grid>
+      </GridItem>
     </Grid>
   );
 };

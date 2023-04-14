@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { AppBar as SuidAppBar } from '@suid/material';
+import { Box, BoxProps } from '@components';
 
-type SuidAppBarProps = Parameters<typeof SuidAppBar>[0];
-export interface AppBarProps extends SuidAppBarProps {}
+export interface AppBarProps extends BoxProps {}
 
-export const AppBar: Component<AppBarProps> = (props) => {
-  return <SuidAppBar {...props} />;
+export const AppBar: Component<BoxProps> = (props) => {
+  return <Box {...props} />;
 };

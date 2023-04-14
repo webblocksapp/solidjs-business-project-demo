@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { TableCell as SuidTableCell } from '@suid/material';
+import { Td as HuiTableCell, TdProps as HuiTableCellProps } from '@hope-ui/solid';
 
-type SuidTableCellProps = Parameters<typeof SuidTableCell>[0];
-export type TableCellProps = SuidTableCellProps & {};
+export type TableCellProps = HuiTableCellProps & {};
 
 export const TableCell: Component<TableCellProps> = (props) => {
-  return <SuidTableCell {...props} />;
+  return <HuiTableCell {...props} />;
 };

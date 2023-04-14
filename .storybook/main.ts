@@ -1,5 +1,4 @@
 import type { StorybookConfig } from 'storybook-solidjs-vite';
-import suidPlugin from '@suid/vite-plugin';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 const config: StorybookConfig = {
@@ -13,7 +12,7 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   viteFinal: (config) => {
-    config.plugins?.push(suidPlugin(), tsconfigPaths());
+    config.plugins?.push(tsconfigPaths());
     return config;
   },
 };

@@ -18,7 +18,7 @@ export const productHandler = [
   }),
   // Create
   rest.post(`${ENV.baseURL}/products`, async (req, res, ctx) => {
-    let body = { id: uuid(), ...(await req.json()) };
+    let body = { ...(await req.json()), id: uuid() };
     return res(ctx.status(200), ctx.json(body));
   }),
   // Read

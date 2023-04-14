@@ -1,9 +1,9 @@
-import { MenuList as SuidMenuList } from '@suid/material';
 import { Component } from 'solid-js';
+import { Menu as HuiMenuList } from '@hope-ui/solid';
 
-type SuidMenuListProps = Parameters<typeof SuidMenuList>[0];
-export interface MenuListProps extends SuidMenuListProps {}
+type HuiMenuListProps = Parameters<typeof HuiMenuList>[0];
+export interface MenuListProps extends HuiMenuListProps {}
 
 export const MenuList: Component<MenuListProps> = (props) => {
-  return <SuidMenuList {...props} />;
+  return <HuiMenuList {...props} />;
 };

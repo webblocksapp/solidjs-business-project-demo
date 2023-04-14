@@ -8,6 +8,4 @@ export * from './Pagination';
 export * from './Paths';
 export * from './Primitive';
 export * from './Product';
-export * from './ProductActions';
 export * from './ProductState';
-export * from './RootState';

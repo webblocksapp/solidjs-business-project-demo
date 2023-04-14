@@ -41,10 +41,10 @@ export const useProductModel = () => {
   };
 
   const save = (data: Product) => {
-    if (data.id === undefined) {
-      return create(data);
-    } else {
+    if (data.id) {
       return update(data.id, data);
+    } else {
+      return create(data);
     }
   };
 

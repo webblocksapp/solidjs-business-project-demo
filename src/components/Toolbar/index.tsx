@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { Toolbar as SuidToolbar } from '@suid/material';
+import { Box, BoxProps } from '@components';
 
-type SuidToolbarProps = Parameters<typeof SuidToolbar>[0];
-export interface ToolbarProps extends SuidToolbarProps {}
+export interface ToolbarProps extends BoxProps {}
 
 export const Toolbar: Component<ToolbarProps> = (props) => {
-  return <SuidToolbar {...props} />;
+  return <Box {...props} />;
 };

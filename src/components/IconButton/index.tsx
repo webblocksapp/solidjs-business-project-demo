@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { IconButton as SuidIconButton } from '@suid/material';
+import { IconButton as HuiIconButton, IconButtonProps as HuiIconButtonProps } from '@hope-ui/solid';
 
-type SuidIconButtonProps = Parameters<typeof SuidIconButton>[0];
-export interface IconButtonProps extends SuidIconButtonProps {}
+export interface IconButtonProps extends HuiIconButtonProps {}
 
 export const IconButton: Component<IconButtonProps> = (props) => {
-  return <SuidIconButton {...props} />;
+  return <HuiIconButton {...props} />;
 };

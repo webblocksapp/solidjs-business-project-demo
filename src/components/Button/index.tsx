@@ -1,9 +1,8 @@
 import { Component } from 'solid-js';
-import { Button as SuidButton } from '@suid/material';
+import { Button as HuiButton, ButtonProps as HuiButtonProps } from '@hope-ui/solid';
 
-type SuidButtonProps = Parameters<typeof SuidButton>[0];
-export interface ButtonProps extends SuidButtonProps {}
+export interface ButtonProps extends HuiButtonProps {}
 
 export const Button: Component<ButtonProps> = (props) => {
-  return <SuidButton {...props} />;
+  return <HuiButton {...props} />;
 };
