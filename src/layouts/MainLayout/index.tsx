@@ -5,9 +5,9 @@ import { Component } from 'solid-js';
 
 export const MainLayout: Component = () => {
   return (
-    <Box displayRaw="grid" gridTemplateRows="auto 1fr">
+    <Box display="grid" gridTemplateRows="auto 1fr">
       <Header brand={<Typography>Admin</Typography>} />
-      <Box displayRaw="grid" gridTemplateColumns="250px 1fr">
+      <Box display="grid" gridTemplateColumns="250px 1fr">
         <Sidebar>
           <SidebarMenu items={MAIN_SIDEBAR_MENU} />
         </Sidebar>

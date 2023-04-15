@@ -18,7 +18,7 @@ export const DataTable: Component<DataTableProps> = (props) => {
     if (index >= props.pagination.limit) return <></>;
 
     return (
-      <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+      <TableRow>
         <For each={props.columns}>
           {(column) => (
             <Switch fallback={<TableCell>{row[column.path!]}</TableCell>}>
@@ -48,7 +48,9 @@ export const DataTable: Component<DataTableProps> = (props) => {
             <For each={props.columns}>{(column) => <TableCell>{column.label}</TableCell>}</For>
           </TableRow>
         </TableHead>
-        <TableBody>{props.data.map(renderRow)}</TableBody>
+        <TableBody>
+          <For each={props.data}>{(row, i) => renderRow(row, i())}</For>
+        </TableBody>
       </Table>
       <Show when={props.pagination.count}>
         <Box displayRaw="flex" justifyContent="center" mt={2}>

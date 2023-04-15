@@ -1,5 +1,5 @@
-import { Component, createEffect } from 'solid-js';
-import { Button, Grid, Stack, TextField, Typography } from '@components';
+import { Component, Show, createEffect } from 'solid-js';
+import { Alert, Button, Grid, GridItem, Stack, TextField, Typography } from '@components';
 import { schema } from './schema';
 import { useNavigate, useParams } from '@solidjs/router';
 import { useProductModel } from '@models';
@@ -16,6 +16,7 @@ export const ProductForm: Component = () => {
   const submit = async (event: Event) => {
     event.preventDefault();
     await productModel.save(formHandler.formData());
+    if (productState().updateError) return;
     back();
   };
 
@@ -37,33 +38,34 @@ export const ProductForm: Component = () => {
         <Typography>Loading...</Typography>
       ) : (
         <form onSubmit={submit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <TextField formHandler={formHandler} name="name" label="Name" />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField formHandler={formHandler} name="brand" label="Brand" />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField formHandler={formHandler} name="price" label="Price" />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField formHandler={formHandler} name="currency" disabled label="Currency" />
-            </Grid>
-            <Grid item xs={12}>
-              <Stack direction="row" spacing={2}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  disabled={formHandler.isFormInvalid() || productState().updating}
-                >
+          <Show when={productState().updateError}>
+            <Alert mb="$2" status="danger">
+              {productState().updateError}
+            </Alert>
+          </Show>
+          <Grid templateColumns={{ '@sm': '1fr', '@md': '1fr 1fr' }} gap={17}>
+            <GridItem>
+              <TextField formHandler={formHandler} name="name" placeholder="Name" />
+            </GridItem>
+            <GridItem>
+              <TextField formHandler={formHandler} name="brand" placeholder="Brand" />
+            </GridItem>
+            <GridItem>
+              <TextField formHandler={formHandler} name="price" placeholder="Price" />
+            </GridItem>
+            <GridItem>
+              <TextField formHandler={formHandler} name="currency" disabled placeholder="Currency" />
+            </GridItem>
+            <GridItem>
+              <Stack spacing={10}>
+                <Button type="submit" variant="solid" disabled={formHandler.isFormInvalid() || productState().updating}>
                   Submit
                 </Button>
-                <Button onClick={back} variant="contained" color="secondary">
+                <Button onClick={back} variant="solid" color="secondary">
                   Cancel
                 </Button>
               </Stack>
-            </Grid>
+            </GridItem>
           </Grid>
         </form>
       )}

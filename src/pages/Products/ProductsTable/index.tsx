@@ -3,6 +3,7 @@ import { Alert, Button, DataTable, Grid, GridItem, IconButton, Stack } from '@co
 import { useProductModel } from '@models';
 import { Product } from '@interfaces';
 import { useNavigate } from '@solidjs/router';
+import { FiEdit2, FiTrash2 } from 'solid-icons/fi';
 
 export const ProductsTable: Component = () => {
   const productModel = useProductModel();
@@ -39,12 +40,12 @@ export const ProductsTable: Component = () => {
             {
               label: 'Actions',
               cellTemplate: (row: Product) => (
-                <>
-                  <IconButton icon={<>Edit</>} aria-label="Edit" onClick={() => navigate(`update/${row.id}`)} />
-                  <IconButton icon={<>Delete</>} aria-label="Delete" onClick={() => productModel.remove(row.id!)}>
+                <Stack spacing={10}>
+                  <IconButton icon={<FiEdit2 />} aria-label="Edit" onClick={() => navigate(`update/${row.id}`)} />
+                  <IconButton icon={<FiTrash2 />} aria-label="Delete" onClick={() => productModel.remove(row.id!)}>
                     Delete
                   </IconButton>
-                </>
+                </Stack>
               ),
             },
           ]}

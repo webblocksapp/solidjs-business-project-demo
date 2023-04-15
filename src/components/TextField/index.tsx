@@ -15,7 +15,7 @@ export const TextField: Component<TextFieldProps> = (props) => {
         <HuiTextField
           {...rest}
           invalid={field.helpers.error}
-          onChange={(event) => {
+          onInput={(event) => {
             field.helpers.onValueChange(event.currentTarget.value);
           }}
           onBlur={() => {
