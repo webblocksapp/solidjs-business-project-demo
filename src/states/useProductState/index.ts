@@ -4,16 +4,8 @@ import { createStore, reconcile } from 'solid-js/store';
 const initialState = (): ProductState => ({
   products: [],
   pagination: { count: 0, limit: 10, page: 1 },
-  listing: false,
-  creating: false,
-  updating: false,
-  removing: false,
-  reading: false,
-  listError: '',
-  createError: '',
-  updateError: '',
-  removeError: '',
-  readError: '',
+  loading: false,
+  error: '',
 });
 
 const [store, setStore] = createStore(initialState());
@@ -22,20 +14,12 @@ export const useProductState = () => {
   const list = (payload: { data: Product[]; pagination: Pagination }) => {
     setStore('products', payload.data);
     setStore('pagination', payload.pagination);
-    setStore('listError', '');
-  };
-
-  const listing = (flag: boolean) => {
-    setStore('listing', flag);
+    setStore('error', '');
   };
 
   const create = (product: Product) => {
     setStore('products', (products) => [product, ...products]);
-    setStore('createError', '');
-  };
-
-  const creating = (flag: boolean) => {
-    setStore('creating', flag);
+    setStore('error', '');
   };
 
   const update = (id: Id, product: Product) => {
@@ -48,42 +32,26 @@ export const useProductState = () => {
         return item;
       })
     );
-    setStore('updateError', '');
-  };
-
-  const updating = (flag: boolean) => {
-    setStore('updating', flag);
+    setStore('error', '');
   };
 
   const remove = (id: Id) => {
     setStore('products', (products) => products.filter((item) => item.id !== id));
     setStore('pagination', (pagination) => ({ ...pagination, count: pagination.count - 1 }));
-    setStore('removeError', '');
-  };
-
-  const removing = (flag: boolean) => {
-    setStore('removing', flag);
+    setStore('error', '');
   };
 
   const read = (product: Product) => {
     setStore('products', (products) => [product, ...products]);
-    setStore('readError', '');
+    setStore('error', '');
   };
 
-  const reading = (flag: boolean) => {
-    setStore('reading', flag);
+  const loading = (flag: boolean) => {
+    setStore('loading', flag);
   };
 
-  const errors = (
-    errors: Partial<{
-      listError: string;
-      createError: string;
-      updateError: string;
-      removeError: string;
-      readError: string;
-    }>
-  ) => {
-    setStore(errors);
+  const error = (message: string) => {
+    setStore('error', message);
   };
 
   const resetStore = () => {
@@ -94,15 +62,11 @@ export const useProductState = () => {
     store,
     resetStore,
     list,
-    listing,
     create,
-    creating,
     update,
-    updating,
     read,
-    reading,
     remove,
-    removing,
-    errors,
+    loading,
+    error,
   };
 };

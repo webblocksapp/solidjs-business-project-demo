@@ -1,4 +1,4 @@
-import { ENV } from '@constants';
+import { ENV, MOCKS_DELAY } from '@constants';
 import { paginateData } from '@utils';
 import { rest } from 'msw';
 import { data } from '../data';
@@ -11,6 +11,7 @@ export const productHandler = [
     const page: any = req.url.searchParams.get('_page');
 
     return res(
+      ctx.delay(MOCKS_DELAY),
       ctx.set('x-total-count', String(data.products.length)),
       ctx.status(200),
       ctx.json(paginateData(data.products, { limit, page }))
@@ -19,20 +20,20 @@ export const productHandler = [
   // Create
   rest.post(`${ENV.baseURL}/products`, async (req, res, ctx) => {
     let body = { ...(await req.json()), id: uuid() };
-    return res(ctx.status(200), ctx.json(body));
+    return res(ctx.delay(MOCKS_DELAY), ctx.status(200), ctx.json(body));
   }),
   // Read
   rest.get(`${ENV.baseURL}/products/:id`, (req, res, ctx) => {
     const { id } = req.params;
-    return res(ctx.status(200), ctx.json(data.products.find((item) => item.id == id)));
+    return res(ctx.delay(MOCKS_DELAY), ctx.status(200), ctx.json(data.products.find((item) => item.id == id)));
   }),
   // Update
   rest.put(`${ENV.baseURL}/products/:id`, async (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(await req.json()));
+    return res(ctx.delay(MOCKS_DELAY), ctx.status(200), ctx.json(await req.json()));
   }),
   // Remove
   rest.delete(`${ENV.baseURL}/products/:id`, async (req, res, ctx) => {
     const { id } = req.params;
-    return res(ctx.status(200), ctx.json(data.products.find((item) => item.id == id)));
+    return res(ctx.delay(MOCKS_DELAY), ctx.status(200), ctx.json(data.products.find((item) => item.id == id)));
   }),
 ];

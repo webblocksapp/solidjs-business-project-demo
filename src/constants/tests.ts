@@ -1,1 +1,2 @@
-export const SLEEP_TIME = 1000;
+export const SLEEP_TIME = 200;
+export const MOCKS_DELAY = 200;

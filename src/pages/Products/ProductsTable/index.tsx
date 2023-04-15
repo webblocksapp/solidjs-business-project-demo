@@ -16,6 +16,11 @@ export const ProductsTable: Component = () => {
 
   return (
     <Grid>
+      {productState().error && (
+        <GridItem>
+          <Alert status="danger">{productState().error}</Alert>
+        </GridItem>
+      )}
       <GridItem>
         <Stack direction="row" justifyContent="flex-end">
           <Button variant="solid" color="primary" onClick={() => navigate('create')}>
@@ -23,14 +28,9 @@ export const ProductsTable: Component = () => {
           </Button>
         </Stack>
       </GridItem>
-      {productState().listError && (
-        <GridItem>
-          <Alert status="danger">{productState().listError}</Alert>
-        </GridItem>
-      )}
       <GridItem>
         <DataTable
-          loading={productState().listing}
+          loading={productState().loading}
           data={productState().products}
           columns={[
             { path: 'id', label: 'Id' },

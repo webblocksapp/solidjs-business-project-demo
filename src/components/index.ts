@@ -14,6 +14,8 @@ export * from './ListItemIcon';
 export * from './Redirect';
 export * from './Sidebar';
 export * from './SidebarMenu';
+export * from './Skeleton';
+export * from './SkeletonBox';
 export * from './Stack';
 export * from './Table';
 export * from './TableBody';

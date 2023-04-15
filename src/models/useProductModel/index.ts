@@ -9,34 +9,34 @@ export const useProductModel = () => {
 
   const list = async (params?: EntityParams<Product>) => {
     try {
-      productState.listing(true);
+      productState.loading(true);
       productState.list(await productApiClient.list(params));
     } catch (error) {
-      productState.errors({ listError: handleError(error) });
+      productState.error(handleError(error));
     } finally {
-      productState.listing(false);
+      productState.loading(false);
     }
   };
 
   const create = async (data: Product) => {
     try {
-      productState.creating(true);
+      productState.loading(true);
       productState.create(await productApiClient.create(data));
     } catch (error) {
-      productState.errors({ createError: handleError(error) });
+      productState.error(handleError(error));
     } finally {
-      productState.creating(false);
+      productState.loading(false);
     }
   };
 
   const update = async (id: Id, data: Product) => {
     try {
-      productState.updating(true);
+      productState.loading(true);
       productState.update(id, await productApiClient.update(id, data));
     } catch (error) {
-      productState.errors({ updateError: handleError(error) });
+      productState.error(handleError(error));
     } finally {
-      productState.updating(false);
+      productState.loading(false);
     }
   };
 
@@ -50,23 +50,23 @@ export const useProductModel = () => {
 
   const remove = async (id: Id) => {
     try {
-      productState.removing(true);
+      productState.loading(true);
       productState.remove(id);
     } catch (error) {
-      productState.errors({ removeError: handleError(error) });
+      productState.error(handleError(error));
     } finally {
-      productState.removing(false);
+      productState.loading(false);
     }
   };
 
   const read = async (id: Id) => {
     try {
-      productState.reading(true);
+      productState.loading(true);
       productState.read(await productApiClient.read(id));
     } catch (error) {
-      productState.errors({ readError: handleError(error) });
+      productState.error(handleError(error));
     } finally {
-      productState.reading(false);
+      productState.loading(false);
     }
   };
 

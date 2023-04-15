@@ -7,10 +7,10 @@ export const MainLayout: Component = () => {
   return (
     <Box display="grid" gridTemplateRows="auto 1fr">
       <Header brand={<Typography>Admin</Typography>} />
-      <Box display="grid" gridTemplateColumns="250px 1fr">
-        <Sidebar>
+      <Box display="grid" gridTemplateColumns="1fr">
+        {/* <Sidebar>
           <SidebarMenu items={MAIN_SIDEBAR_MENU} />
-        </Sidebar>
+        </Sidebar> */}
         <Content>
           <Outlet />
         </Content>
