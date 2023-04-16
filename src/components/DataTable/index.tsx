@@ -1,10 +1,20 @@
-import { Box, Table, TableHead, TableCell, TableRow, TableBody } from '@components';
+import {
+  Box,
+  Table,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableBody,
+  GridItem,
+  Alert,
+} from '@components';
 import { Pagination, DataTableColumn } from '@interfaces';
 import { Component, For, Match, Show, Switch, mergeProps } from 'solid-js';
 
 export interface DataTableProps {
   columns: Array<DataTableColumn>;
   data: Array<any>;
+  error?: string;
   pagination: Pagination;
   loading?: boolean;
   onPageChange?: (page: number) => void;
@@ -41,20 +51,23 @@ export const DataTable: Component<DataTableProps> = (props) => {
   // };
 
   return (
-    <>
-      <Table style={{ opacity: props.loading ? 0.4 : undefined }}>
-        <TableHead>
-          <TableRow>
-            <For each={props.columns}>{(column) => <TableCell>{column.label}</TableCell>}</For>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <For each={props.data}>{(row, i) => renderRow(row, i())}</For>
-        </TableBody>
-      </Table>
-      <Show when={props.pagination.count}>
-        <Box displayRaw="flex" justifyContent="center" mt={2}>
-          {/* <TablePagination
+    <Show
+      when={props.error}
+      fallback={
+        <>
+          <Table style={{ opacity: props.loading ? 0.4 : undefined }}>
+            <TableHead>
+              <TableRow>
+                <For each={props.columns}>{(column) => <TableCell>{column.label}</TableCell>}</For>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <For each={props.data}>{(row, i) => renderRow(row, i())}</For>
+            </TableBody>
+          </Table>
+          <Show when={props.pagination.count}>
+            <Box displayRaw="flex" justifyContent="center" mt={2}>
+              {/* <TablePagination
             component="div"
             count={props.pagination.count}
             page={props.pagination.page}
@@ -62,8 +75,14 @@ export const DataTable: Component<DataTableProps> = (props) => {
             onPageChange={onPageChange}
             onRowsPerPageChange={onRowsPerPageChange}
           /> */}
-        </Box>
-      </Show>
-    </>
+            </Box>
+          </Show>
+        </>
+      }
+    >
+      <GridItem>
+        <Alert status="danger">{props.error}</Alert>
+      </GridItem>
+    </Show>
   );
 };

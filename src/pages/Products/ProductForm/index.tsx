@@ -1,9 +1,9 @@
 import { Component, createEffect } from 'solid-js';
-import { Button, Grid, GridItem, Skeleton, Stack, TextField, Typography } from '@components';
-import { schema } from './schema';
+import { Button, Grid, GridItem, Skeleton, Stack, TextField } from '@components';
 import { useNavigate, useParams } from '@solidjs/router';
 import { useProductModel } from '@models';
 import { useFormHandler } from '@utils';
+import { schema } from './schema';
 
 export const ProductForm: Component = () => {
   const navigate = useNavigate();
@@ -15,8 +15,10 @@ export const ProductForm: Component = () => {
 
   const submit = async (event: Event) => {
     event.preventDefault();
+    const { isFormInvalid } = await formHandler.validateForm();
+    if (isFormInvalid) return;
     await productModel.save(formHandler.formData());
-    if (productState().error) return;
+    if (productState().saveError) return;
     back();
   };
 
@@ -34,7 +36,7 @@ export const ProductForm: Component = () => {
 
   return (
     <form onSubmit={submit}>
-      <Skeleton loading={!Boolean(product()) && productState().loading}>
+      <Skeleton loading={!Boolean(product()) && productState().reading}>
         <Grid templateColumns={{ '@sm': '1fr', '@md': '1fr 1fr' }} gap={17}>
           <GridItem>
             <TextField formHandler={formHandler} name="name" placeholder="Name" />
@@ -50,11 +52,7 @@ export const ProductForm: Component = () => {
           </GridItem>
           <GridItem>
             <Stack spacing={10}>
-              <Button
-                type="submit"
-                variant="solid"
-                disabled={formHandler.isFormInvalid() || productState().loading}
-              >
+              <Button type="submit" variant="solid" disabled={productState().saving}>
                 Submit
               </Button>
               <Button onClick={back} variant="solid" color="secondary">

@@ -9,64 +9,49 @@ export const useProductModel = () => {
 
   const list = async (params?: EntityParams<Product>) => {
     try {
-      productState.loading(true);
+      productState.listing(true);
       productState.list(await productApiClient.list(params));
     } catch (error) {
-      productState.error(handleError(error));
+      productState.errors({ listError: handleError(error) });
     } finally {
-      productState.loading(false);
+      productState.listing(false);
     }
   };
 
-  const create = async (data: Product) => {
+  const save = async (data: Product) => {
     try {
-      productState.loading(true);
-      productState.create(await productApiClient.create(data));
+      productState.saving(true);
+      if (data.id) {
+        productState.update(data.id, await productApiClient.update(data.id, data));
+      } else {
+        productState.create(await productApiClient.create(data));
+      }
     } catch (error) {
-      productState.error(handleError(error));
+      productState.errors({ saveError: handleError(error) });
     } finally {
-      productState.loading(false);
-    }
-  };
-
-  const update = async (id: Id, data: Product) => {
-    try {
-      productState.loading(true);
-      productState.update(id, await productApiClient.update(id, data));
-    } catch (error) {
-      productState.error(handleError(error));
-    } finally {
-      productState.loading(false);
-    }
-  };
-
-  const save = (data: Product) => {
-    if (data.id) {
-      return update(data.id, data);
-    } else {
-      return create(data);
+      productState.saving(false);
     }
   };
 
   const remove = async (id: Id) => {
     try {
-      productState.loading(true);
+      productState.removing(true);
       productState.remove(id);
     } catch (error) {
-      productState.error(handleError(error));
+      productState.errors({ removeError: handleError(error) });
     } finally {
-      productState.loading(false);
+      productState.removing(false);
     }
   };
 
   const read = async (id: Id) => {
     try {
-      productState.loading(true);
+      productState.reading(true);
       productState.read(await productApiClient.read(id));
     } catch (error) {
-      productState.error(handleError(error));
+      productState.errors({ readError: handleError(error) });
     } finally {
-      productState.loading(false);
+      productState.reading(false);
     }
   };
 
@@ -77,5 +62,5 @@ export const useProductModel = () => {
     return () => productState.store.products.find((item) => item.id == id);
   };
 
-  return { list, create, update, remove, read, save, selectProductState, selectProduct };
+  return { list, remove, read, save, selectProductState, selectProduct };
 };

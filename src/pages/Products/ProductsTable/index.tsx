@@ -1,5 +1,5 @@
 import { Component, createEffect } from 'solid-js';
-import { Alert, Button, DataTable, Grid, GridItem, IconButton, Stack } from '@components';
+import { Button, DataTable, Grid, GridItem, IconButton, Stack } from '@components';
 import { useProductModel } from '@models';
 import { Product } from '@interfaces';
 import { useNavigate } from '@solidjs/router';
@@ -16,11 +16,6 @@ export const ProductsTable: Component = () => {
 
   return (
     <Grid>
-      {productState().error && (
-        <GridItem>
-          <Alert status="danger">{productState().error}</Alert>
-        </GridItem>
-      )}
       <GridItem>
         <Stack direction="row" justifyContent="flex-end">
           <Button variant="solid" color="primary" onClick={() => navigate('create')}>
@@ -30,7 +25,8 @@ export const ProductsTable: Component = () => {
       </GridItem>
       <GridItem>
         <DataTable
-          loading={productState().loading}
+          error={productState().listError}
+          loading={productState().listing}
           data={productState().products}
           columns={[
             { path: 'id', label: 'Id' },
@@ -41,8 +37,16 @@ export const ProductsTable: Component = () => {
               label: 'Actions',
               cellTemplate: (row: Product) => (
                 <Stack spacing={10}>
-                  <IconButton icon={<FiEdit2 />} aria-label="Edit" onClick={() => navigate(`update/${row.id}`)} />
-                  <IconButton icon={<FiTrash2 />} aria-label="Delete" onClick={() => productModel.remove(row.id!)}>
+                  <IconButton
+                    icon={<FiEdit2 />}
+                    aria-label="Edit"
+                    onClick={() => navigate(`update/${row.id}`)}
+                  />
+                  <IconButton
+                    icon={<FiTrash2 />}
+                    aria-label="Delete"
+                    onClick={() => productModel.remove(row.id!)}
+                  >
                     Delete
                   </IconButton>
                 </Stack>
