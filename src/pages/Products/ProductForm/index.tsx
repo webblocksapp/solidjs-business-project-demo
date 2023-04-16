@@ -36,7 +36,7 @@ export const ProductForm: Component = () => {
 
   return (
     <form onSubmit={submit}>
-      <Skeleton loading={!Boolean(product()) && productState().reading}>
+      <Skeleton loading={productState().reading}>
         <Grid templateColumns={{ '@sm': '1fr', '@md': '1fr 1fr' }} gap={17}>
           <GridItem>
             <TextField formHandler={formHandler} name="name" placeholder="Name" />
