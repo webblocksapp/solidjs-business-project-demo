@@ -11,6 +11,7 @@ export * from './Header';
 export * from './IconButton';
 export * from './ListItem';
 export * from './ListItemIcon';
+export * from './Pagination';
 export * from './Redirect';
 export * from './Sidebar';
 export * from './SidebarMenu';

@@ -7,15 +7,17 @@ import {
   TableBody,
   GridItem,
   Alert,
+  Pagination,
+  PaginationProps,
 } from '@components';
-import { Pagination, DataTableColumn } from '@interfaces';
+import { Pagination as PaginationType, DataTableColumn } from '@interfaces';
 import { Component, For, Match, Show, Switch, mergeProps } from 'solid-js';
 
 export interface DataTableProps {
   columns: Array<DataTableColumn>;
   data: Array<any>;
   error?: string;
-  pagination: Pagination;
+  pagination: PaginationType;
   loading?: boolean;
   onPageChange?: (page: number) => void;
   onRowsPerPageChange?: (limit: number) => void;
@@ -42,9 +44,9 @@ export const DataTable: Component<DataTableProps> = (props) => {
     );
   };
 
-  // const onPageChange: TablePaginationProps['onPageChange'] = (_, page) => {
-  //   props?.onPageChange?.(page);
-  // };
+  const onPageChange: PaginationProps['onPageChange'] = (page) => {
+    props?.onPageChange?.(page);
+  };
 
   // const onRowsPerPageChange: TablePaginationProps['onRowsPerPageChange'] = (e) => {
   //   props?.onRowsPerPageChange?.(Number(e.target.value));
@@ -67,14 +69,13 @@ export const DataTable: Component<DataTableProps> = (props) => {
           </Table>
           <Show when={props.pagination.count}>
             <Box displayRaw="flex" justifyContent="center" mt={2}>
-              {/* <TablePagination
-            component="div"
-            count={props.pagination.count}
-            page={props.pagination.page}
-            rowsPerPage={props.pagination.limit}
-            onPageChange={onPageChange}
-            onRowsPerPageChange={onRowsPerPageChange}
-          /> */}
+              <Pagination
+                count={props.pagination.count}
+                page={props.pagination.page}
+                onPageChange={onPageChange}
+                rowsPerPage={props.pagination.limit}
+                // onRowsPerPageChange={onRowsPerPageChange}
+              />
             </Box>
           </Show>
         </>
