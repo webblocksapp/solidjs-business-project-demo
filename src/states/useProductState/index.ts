@@ -1,7 +1,7 @@
 import { Id, Pagination, Product, ProductState } from '@interfaces';
 import { createStore, reconcile } from 'solid-js/store';
 
-const initialState: ProductState = {
+const initialState = (): ProductState => ({
   products: [],
   pagination: { count: 0, limit: 10, page: 1 },
   listing: false,
@@ -12,9 +12,9 @@ const initialState: ProductState = {
   saveError: '',
   removeError: '',
   readError: '',
-};
+});
 
-const [store, setStore] = createStore(initialState);
+const [store, setStore] = createStore(initialState());
 
 export const useProductState = () => {
   const list = (payload: { data: Product[]; pagination: Pagination }) => {
@@ -80,7 +80,7 @@ export const useProductState = () => {
   };
 
   const resetStore = () => {
-    setStore(reconcile(initialState));
+    setStore(reconcile(initialState()));
   };
 
   return {
